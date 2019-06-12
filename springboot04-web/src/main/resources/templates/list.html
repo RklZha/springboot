@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!--获取对象的属性、方法-->
+    <div th:text="${user.name}"></div>
+    <div th:text="${user['age']}"></div>
+    <div th:text="${users[2].age}"></div>
+    <div th:text="${users.size()}"></div>
+    <div>元素个数：[[${users.size()}]]</div>
+    <div th:text="${users.get(1).name}"></div>
+    <div th:text="${users.isEmpty()}"></div>
+    <hr>
+
+    <!--使用内置的基本对象-->
+    <div th:text="${session.sex}"></div>
+    <div th:text="${application.hobby}"></div>
+    <hr>
+
+    <!--使用内置的工具对象-->
+    <div th:text="${#strings.startsWith(user.name,'x')}"></div>
+    <div th:text="${#strings.substring(user.name,1,2)}"></div>
+    <div th:text="${#strings.length(user.name)}"></div>
+    <div th:text="${#dates.createNow()}"></div>
+    <div th:text="${#dates.create(2018,12,31)}"></div>
+    <div th:text="${#dates.format(birthday,'yyyy-MM-dd HH:mm:ss:SSS')}"></div>
+    <hr>
+
+    <!--*{}选择表达式-->
+    <div th:object="${user}">
+        <div th:text="*{id}"></div>
+        <div th:text="*{name}"></div>
+        <div th:text="*{age}"></div>
+    </div>
+    <hr>
+
+    <!--@{} url表达式-->
+    <a href="" th:href="@{/findUser(username=${user.name})}">查询指定的用户信息</a> <br>
+    <a href="product/list.html" th:href="@{/product/list}">商品列表</a>
+    <script th:src="@{/js/common.js}"></script>
+    <hr>
+
+    <!--运算符-->
+    性别：<input type="radio" name="sex" value="male" th:checked="${session.sex eq 'male'}">男
+          <input type="radio" name="sex" value="female" th:checked="${session.sex eq 'female'}">女
+    <div th:if="${user.age==null}">地址未找到</div>
+    <div th:text="${user.age}">地址未找到</div>
+    <div th:text="${users.size()>=3?'大于等于3':'小于3'}"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+server:
+  port: 8180
+  servlet:
+    context-path:
+spring:
+  profiles:
+    active: testing
+
+---
+
+spring:
+  profiles: develop
+server:
+  port: 7771
+
+---
+
+spring:
+  profiles: testing
+server:
+  port: 7772
+
+---
+
+spring:
+  profiles: product
+server:
+  port: 8080
+#user:
+#  username: admin
+#  age: 18
+#  status: true
+#  birthday: 2019/3/30
+#  address:
+#    province: 浙江省
+#    city: 杭州市
+#  lists:
+#    - list1
+#    - list2
+#    - list3
+#  maps: {k1: v1,k2: v2}
+

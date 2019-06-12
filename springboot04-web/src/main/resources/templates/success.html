@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--导入thymeleaf的命名空间-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>success</h2>
+
+    <!-- 使用th:text属性，设置标签中的文本，表达式${}可以获取模型中的数据-->
+    <div th:text="${username==null?'':username}">aaa</div>
+    <div>[[${username}]]aaa</div>
+
+   <!-- th:text对特殊字符进行转义，等价于内联方式[[${username}]]
+    th:utext对特殊字符不进行转义，等价于内联方式[(${username})]-->
+    <div th:utext="${username}">bbb</div>
+    <div>[(${username})]bbb</div>
+    <hr>
+    <!--th:html原生属性-->
+    <div id="div1" title="这是一个div" th:id="${id}" th:title="${titile}">div</div>
+    <p th:if="${age>18}">成年</p>
+    <p th:if="${age<18}">未成年</p>
+    <p th:switch="${age}">
+        <span th:case="12">12</span>
+        <span th:case="*">其他</span>
+    </p>
+    <ul>
+        <li th:each="number:${lists}" th:text="${number}"></li>
+    </ul>
+    <hr>
+<!--    <h3>修改用户信息</h3>-->
+<!--    <form action="modify" method="post" th:object="${user}">-->
+<!--        编号:<input type="text" th:field="*{id==null?'':id}" readonly> <br>-->
+<!--        姓名:<input type="text" th:field="*{name==null?'':name}"> <br>-->
+<!--        年龄:<input type="text" th:field="*{age==null?'':age}"> <br>-->
+<!--        <input type="submit" value="修改">-->
+<!--    </form>-->
+    <hr>
+    <div th:include="include/header::head"></div>
+    <div th:insert="include/footer::copy"></div>
+    <div th:replace="include/header::head"></div>
+
+
+</body>
+</html>

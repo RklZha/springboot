@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--th:text、th:utext-->
+    <div th:text="${hello}">aaa</div>
+    <div th:utext="${hello}">bbb</div>
+    <!--使用内联方式，可以在文本前后添加内容-->
+    <div>[[${hello}]]aaa</div>
+    <div>[(${hello})]bbb</div>
+    <hr>
+
+    <!--th:html原生属性-->
+    <div id="div1" title="这是一个div" th:id="${id}" th:title="${title}">div</div>
+    <hr>
+
+    <!--th:if、th:unless、th:switch、th:case-->
+    <p th:if="${age>=18}">成年</p>
+    <p th:unless="${age<18}">成年</p>
+    <p th:switch="${role}">
+        <span th:case="admin">管理员</span>
+        <span th:case="teacher">老师</span>
+        <span th:case="student">学生</span>
+        <span th:case="*">其他</span>
+    </p>
+    <hr>
+
+    <!--th:each-->
+    <ul>
+        <!--<li th:each="name:${names}" th:text="${name}"></li>-->
+        <li th:each="name:${names}">[[${name}]]</li>
+    </ul>
+
+    <!--th:object、th:field-->
+    <h3>修改用户信息</h3>
+    <form action="modify" method="post" th:object="${user}">
+        编号：<input type="text" th:field="*{id}" readonly> <br>
+        姓名：<input type="text" th:field="*{name}"> <br>
+        年龄：<input type="text" th:field="*{age}"> <br>
+        <input type="submit" value="修改">
+    </form>
+
+    <!--th:include、th:insert、th:replace-->
+    <!--引入templates/include/header.html中的frament=head的代码片段-->
+    <div th:include="include/header::head"></div>
+    <div th:insert="include/footer::copy"></div>
+    <div th:replace="include/header::head"></div>
+
+</body>
+</html>
